@@ -12,9 +12,6 @@ class CourModal
         $this->conn = DatabaseConnection::getInstance()->getConnection();
     }
 
-  
-  
-
     public function ajouterCour(Cour $cour)
     {
         if ($cour instanceof CourVideo) {
@@ -173,15 +170,24 @@ class CourModal
 return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     }
-    public function suprimerCourInscreptionEtudiant($IdUser,$IdCour){
+    public function suprimerCourInscreptionEtudiant($IdCour,$IdUser){
+        var_dump($IdUser,$IdCour);
         $requet = "DELETE FROM inscription WHERE IdCour = :idCour AND IdUser = :idUser;";
+
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $stmt = $this->conn->prepare($requet);
             $stmt->execute([
                 ':idCour' => $IdCour,
                 ':idUser' => $IdUser,
             ]);
-
+     header('Location: ./view/page_Etudiant.php');
+    }
+    public function SuprimerCour($idCour){
+        $requet = "DELETE FROM Cour where IdCour = :IdCour ;";
+        $stmt = $this->conn->prepare($requet);
+        $stmt->execute([
+            ':IdCour' => $idCour
+        ]);
         
 
     }
