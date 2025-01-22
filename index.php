@@ -273,6 +273,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo ''. $e->getMessage();
         }
     }
+    if(isset($_POST['SuprimerCour'])){
+        $courRecherche->SuprimerCour($_POST['IdCour']);
+        var_dump($_POST['IdCour']);
+    }
     
 }
 
