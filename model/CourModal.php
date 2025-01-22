@@ -175,6 +175,7 @@ return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function suprimerCourInscreptionEtudiant($IdUser,$IdCour){
         $requet = "DELETE FROM inscription WHERE IdCour = :idCour AND IdUser = :idUser;";
+        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $stmt = $this->conn->prepare($requet);
             $stmt->execute([
                 ':idCour' => $IdCour,
